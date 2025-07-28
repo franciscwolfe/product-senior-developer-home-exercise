@@ -1,0 +1,12 @@
+<div class="person-list">
+  <h2>Person Manager</h2>
+  <ul class="list-group">
+    <li *ngFor="let person of persons"
+        (click)="selectPerson(person)"
+        [class.active]="person.id === selectedPerson?.id"
+        class="list-group-item">
+      {{person.firstName}} {{person.lastName}}
+    </li>
+  </ul>
+  <button class="btn btn-primary mt-2" (click)="selectPerson({id: 0, firstName: '', lastName: '', dateOfBirth: '', departmentId: null})">Add New Person</button>
+</div> 

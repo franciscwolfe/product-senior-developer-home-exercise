@@ -1,18 +1,82 @@
 /* You can add global styles to this file, and also import other style files */
 
 $colour-purple: #373151;
+$colour-parliamentary-orange: #d4722b; // Rich amber orange inspired by Parliament colors
+$colour-light-orange: #f5e6d3; // Light cream orange for backgrounds
 
 body {
   font-family: Arial, Helvetica, sans-serif;
   padding: 1rem 0;
+  background: linear-gradient(135deg, $colour-light-orange 0%, #faf7f2 100%);
+  min-height: 100vh;
+  
+  @media (max-width: 991.98px) {
+    padding: 0.5rem 0;
+  }
 }
 
 h1, h2, h3, h4, h5 {
   color: $colour-purple;
+  
+  @media (max-width: 991.98px) {
+    margin-bottom: 0.75rem;
+  }
 }
 
 strong.highlight {
   color: $colour-purple;
+}
+
+// Parliamentary orange theme
+.container-fluid {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 10px rgba($colour-parliamentary-orange, 0.1);
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}
+
+// Enhanced list styling
+.list-group-item {
+  border-left: 3px solid transparent;
+  transition: all 0.2s ease-in-out;
+  
+  &:hover {
+    border-left-color: $colour-parliamentary-orange;
+    background-color: rgba($colour-parliamentary-orange, 0.05);
+  }
+  
+  &.active {
+    background-color: $colour-parliamentary-orange;
+    border-color: darken($colour-parliamentary-orange, 10%);
+    border-left-color: darken($colour-parliamentary-orange, 15%);
+    
+    &:hover {
+      background-color: darken($colour-parliamentary-orange, 5%);
+    }
+  }
+}
+
+// Button enhancements
+.btn-primary {
+  background-color: $colour-parliamentary-orange;
+  border-color: $colour-parliamentary-orange;
+  
+  &:hover, &:focus {
+    background-color: darken($colour-parliamentary-orange, 8%);
+    border-color: darken($colour-parliamentary-orange, 8%);
+  }
+  
+  &:active {
+    background-color: darken($colour-parliamentary-orange, 12%);
+    border-color: darken($colour-parliamentary-orange, 12%);
+  }
+}
+
+// Form enhancements
+.form-control:focus, .form-select:focus {
+  border-color: $colour-parliamentary-orange;
+  box-shadow: 0 0 0 0.2rem rgba($colour-parliamentary-orange, 0.25);
 }
 
 table {
@@ -29,5 +93,19 @@ table {
 
     .table {
         min-width: 600px;
+    }
+}
+
+// Mobile optimizations
+@media (max-width: 991.98px) {
+  .container-fluid {
+    padding-left: 0.75rem !important;
+    padding-right: 0.75rem !important;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+  
+  .form-control, .form-select {
+    font-size: 16px; // Prevents zoom on iOS
     }
 }

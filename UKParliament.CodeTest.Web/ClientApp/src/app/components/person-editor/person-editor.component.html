@@ -1,0 +1,62 @@
+<div class="person-editor">
+  <h2>{{form.value.id ? 'Edit Person' : 'Add Person'}}</h2>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="firstName" class="form-label">First Name</label>
+      <input id="firstName" type="text" class="form-control" formControlName="firstName" />
+      <div *ngIf="form.get('firstName')?.touched && form.get('firstName')?.invalid" class="text-danger">
+        First Name is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="lastName" class="form-label">Last Name</label>
+      <input id="lastName" type="text" class="form-control" formControlName="lastName" />
+      <div *ngIf="form.get('lastName')?.touched && form.get('lastName')?.invalid" class="text-danger">
+        Last Name is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="dateOfBirth" class="form-label">Date of Birth</label>
+      <input id="dateOfBirth" type="date" class="form-control" formControlName="dateOfBirth" />
+      <div *ngIf="form.get('dateOfBirth')?.touched && form.get('dateOfBirth')?.invalid" class="text-danger">
+        Date of Birth is required.
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="departmentId" class="form-label">Department</label>
+      <select id="departmentId" class="form-select" formControlName="departmentId">
+        <option [value]="null" disabled>Select department</option>
+        <option *ngFor="let dept of departments" [value]="dept.id">{{dept.name}}</option>
+      </select>
+      <div *ngIf="form.get('departmentId')?.touched && form.get('departmentId')?.invalid" class="text-danger">
+        Department is required.
+      </div>
+    </div>
+    <div class="d-flex justify-content-between align-items-center">
+      <div>
+        <button type="submit" class="btn btn-primary me-2">{{form.value.id ? 'Update' : 'Create'}}</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
+      </div>
+      <div>
+        <button *ngIf="form.value.id" type="button" class="btn btn-danger" (click)="showDeleteConfirmation()">Delete</button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Custom Confirmation Dialog -->
+  <div *ngIf="showConfirmDialog" class="confirmation-overlay" (click)="hideDeleteConfirmation()">
+    <div class="confirmation-dialog" (click)="$event.stopPropagation()">
+      <div class="confirmation-header">
+        <h5 class="mb-0">Confirm Deletion</h5>
+      </div>
+      <div class="confirmation-body">
+        <p class="mb-3">Are you sure you want to delete <strong>{{getPersonFullName()}}</strong>?</p>
+        <p class="text-muted mb-0 small">This action cannot be undone.</p>
+      </div>
+      <div class="confirmation-footer">
+        <button type="button" class="btn btn-danger me-2" (click)="confirmDelete()">Delete</button>
+        <button type="button" class="btn btn-secondary" (click)="hideDeleteConfirmation()">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div> 

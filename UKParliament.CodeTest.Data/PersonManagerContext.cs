@@ -13,6 +13,12 @@ public class PersonManagerContext : DbContext
     {
         base.OnModelCreating(modelBuilder);
 
+        modelBuilder.Entity<Person>()
+            .HasOne(p => p.Department)
+            .WithMany()
+            .HasForeignKey(p => p.DepartmentId)
+            .OnDelete(DeleteBehavior.Restrict);
+
         modelBuilder.Entity<Department>().HasData(
             new Department { Id = 1, Name = "Sales" },
             new Department { Id = 2, Name = "Marketing" },
@@ -20,7 +26,7 @@ public class PersonManagerContext : DbContext
             new Department { Id = 4, Name = "HR" });
     }
 
-    public DbSet<Person> People { get; set; }
+    public DbSet<Person> People { get; set; } = null!;
 
-    public DbSet<Department> Departments { get; set; }
+    public DbSet<Department> Departments { get; set; } = null!;
 }

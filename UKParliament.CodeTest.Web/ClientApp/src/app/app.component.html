@@ -1,3 +1,13 @@
-<div class="container">
-  <router-outlet></router-outlet>
+<div class="container-fluid px-3 py-2">
+  <div class="row g-3">
+    <div class="col-12 col-lg-4">
+      <app-person-list (personSelected)="onPersonSelected($event)" [selectedPersonFromParent]="selectedPerson"></app-person-list>
+    </div>
+    <div class="col-12 col-lg-8" *ngIf="selectedPerson">
+      <app-person-editor [person]="selectedPerson"
+                         (saved)="onPersonSaved($event)"
+                         (cancelled)="onCancel()"
+                         (deleted)="onPersonDeleted($event)"></app-person-editor>
+    </div>
+  </div>
 </div>
